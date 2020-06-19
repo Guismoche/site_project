@@ -9,7 +9,7 @@
             </div>
             <h2><a href="">{{ post.title }}</a></h2>
             <p>{{ post.content|linebreaksbr|truncatewords:80 }}</p>
-            <a href="">Lire la suite</a>
+            <a href="{% url 'post_detail' post.pk %}">Lire la suite</a>
         </div>
     {% endfor %}
 
