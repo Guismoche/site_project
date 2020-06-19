@@ -4,12 +4,9 @@
 {% block content %}
     {% for article in post %}
         <div class="post-detail">
-            <div class = "article-detail-title">
-                <h1>{{article.title}}</h1>
-            </div>
-
+            <h1>{{article.title}}</h1>
             <p>Publié le {{article.published_date}} par {{article.author}}</p>
-            <p class = "article-detqil-content">{{article.content|linebreaks}}</p>
+            <p class = "article-detail-content">{{article.content|linebreaks}}</p>
         </div>
     {% endfor %}
 {% endblock %}
