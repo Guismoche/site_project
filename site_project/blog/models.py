@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
+
 # Create your models here.
 class Category(models.Model):
 
@@ -14,17 +15,20 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
+
 class Post(models.Model):
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE, verbose_name="Auteur")
-    title  = models.CharField(max_length = 200, verbose_name="Titre")
-    slug = models.SlugField()
+    title  = models.CharField(max_length = 200, verbose_name="Titre", unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField(verbose_name="Contenu")
-    created_date = models.DateTimeField(default = timezone.now, verbose_name="Date de création")
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name="Date de création")
     published_date = models.DateTimeField(blank=  True, null = True, verbose_name="Date de publication")
     is_publish= models.BooleanField(blank= True, default = False)
 
     category = models.ForeignKey(Category, default = 1, on_delete=models.CASCADE, verbose_name="Catégorie")
+
 
     class Meta:
         ordering = ["-created_date"]

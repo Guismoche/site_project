@@ -1,12 +1,12 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends 'base.html' %}
 
 {% block content %}
-    {% for article in post %}
-        <div class="post-detail">
-            <h1>{{article.title}}</h1>
-            <p>Publié le {{article.published_date}} par {{article.author}}</p>
-            <p class = "article-detail-content">{{article.content|linebreaks}}</p>
-        </div>
-    {% endfor %}
+    <div class="post">
+        <div class = "date">Publié le {{post.published_date}} par {{post.author}}</div>
+        {% if user.is_auhthenticated %}
+            <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% endif %}
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content|linebreaks }}</p>
+    </div>
 {% endblock %}
